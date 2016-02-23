@@ -8,6 +8,9 @@ public class WorkWithPoint {
     Point p1 = new Point(2.3, 5.7);
     Point p2 = new Point(6.4, 8.2);
     System.out.println("Distance between two points is " + distance(p1,p2));
+    Point p3 = new Point(7, 10);
+    Point p4 = new Point(8.3, 2.5);
+    System.out.println("Distance between two points is " + p3.distanceNew(p4));
   }
 
   public static double distance(Point p1, Point p2){

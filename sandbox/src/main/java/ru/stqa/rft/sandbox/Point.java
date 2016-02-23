@@ -12,4 +12,9 @@ public class Point {
     this.x =x;
     this.y =y;
   }
+
+  public double distanceNew(Point anotherPoint) {
+    return Math.sqrt(((anotherPoint.x - x) * (anotherPoint.x - x)) + ((anotherPoint.y - y) * (anotherPoint.y - y)));
+  }
 }
+
