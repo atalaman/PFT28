@@ -1,7 +1,5 @@
 package ru.stqa.pft.addressbook;
 
-//created by seleniumBuilder
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -19,19 +17,10 @@ public class GroupCreationTests {
         wd = new FirefoxDriver();
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
-        login("admin", "secret");
+        Login login = new Login ("admin", "secret", wd);
+        login.login();
     }
 
-    private void login(String username, String password) {
-        wd.findElement(By.name("user")).click();
-        wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys(username);
-        wd.findElement(By.name("pass")).click();
-        wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys(password);
-
-        wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-    }
 
     @Test
     public void testGroupCreation() {
