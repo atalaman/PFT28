@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 public class ContactHelper extends HelperBase {
 
@@ -73,4 +74,14 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.xpath("html/body/div[1]/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
   }
 
+  public void checkContactPresence(NavigationHelper n, GroupHelper g){
+    if (!isThereAContact()) {
+      n.gotoGroupPage();
+      if(!g.isThereAGroup()){
+        g.createGroup(new GroupData("test1", null, null));
+      }
+      n.gotoNewContactPage();
+      contactCreation(new ContactData("Ivan", "Petrov", "Somewhere", "+19012345678", "ipetrov@gmail.com", "test1"), true);
+    }
+  }
 }

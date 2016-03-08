@@ -10,10 +10,7 @@ public class ContactDeletionTests extends TestBase {
 
   public void testContactDeletionByDeleteButton() {
     app.getNavigationHelper().gotoHomePage();
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getNavigationHelper().gotoNewContactPage();
-      app.getContactHelper().contactCreation(new ContactData("Ivan", "Petrov", "Somewhere", "+19012345678", "ipetrov@gmail.com", "test1"), true);
-    }
+    app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
     app.getContactHelper().selectContact();
     app.getContactHelper().deleteSelectedContact();
   }
@@ -22,10 +19,7 @@ public class ContactDeletionTests extends TestBase {
 
   public void testContactDeletionByEditIcon() {
     app.getNavigationHelper().gotoHomePage();
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getNavigationHelper().gotoNewContactPage();
-      app.getContactHelper().contactCreation(new ContactData("Ivan", "Petrov", "Somewhere", "+19012345678", "ipetrov@gmail.com", "test1"), true);
-    }
+    app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
     app.getContactHelper().selectContactForEdition();
     app.getContactHelper().deleteEditedContact();
   }
@@ -34,10 +28,7 @@ public class ContactDeletionTests extends TestBase {
 
   public void testContactDeletionByDetailsIcon() {
     app.getNavigationHelper().gotoHomePage();
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getNavigationHelper().gotoNewContactPage();
-      app.getContactHelper().contactCreation(new ContactData("Ivan", "Petrov", "Somewhere", "+19012345678", "ipetrov@gmail.com", "test1"), true);
-    }
+    app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
     app.getContactHelper().selectContactForDetails();
     app.getContactHelper().editContactFromDetailsPage();
     app.getContactHelper().deleteEditedContact();
