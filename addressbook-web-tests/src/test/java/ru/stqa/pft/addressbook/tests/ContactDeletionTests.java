@@ -7,7 +7,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactDeletionTests extends TestBase {
 
-  @Test
+  @Test(enabled = false)
 
   public void testContactDeletionByDeleteButton() {
     app.getNavigationHelper().gotoHomePage();
@@ -15,13 +15,13 @@ public class ContactDeletionTests extends TestBase {
     if (app.getContactHelper().isThereAContact() == false)
       before++;
     app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
-    app.getContactHelper().selectContact();
+    app.getContactHelper().selectContact(before - 1);
     app.getContactHelper().deleteSelectedContact();
     int after = app.getContactHelper().getContactCount();
     Assert.assertEquals(after, before - 1);
   }
 
-  @Test
+  @Test(enabled = false)
 
   public void testContactDeletionByEditIcon() {
     app.getNavigationHelper().gotoHomePage();
@@ -29,7 +29,7 @@ public class ContactDeletionTests extends TestBase {
     if (app.getContactHelper().isThereAContact() == false)
       before++;
     app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
-    app.getContactHelper().selectContactForEdition();
+    app.getContactHelper().selectContactForEdition(before - 1);
     app.getContactHelper().deleteEditedContact();
     int after = app.getContactHelper().getContactCount();
     Assert.assertEquals(after, before - 1);
@@ -43,7 +43,7 @@ public class ContactDeletionTests extends TestBase {
     if (app.getContactHelper().isThereAContact() == false)
       before++;
     app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
-    app.getContactHelper().selectContactForDetails();
+    app.getContactHelper().selectContactForDetails(before - 1);
     app.getContactHelper().editContactFromDetailsPage();
     app.getContactHelper().deleteEditedContact();
     int after = app.getContactHelper().getContactCount();

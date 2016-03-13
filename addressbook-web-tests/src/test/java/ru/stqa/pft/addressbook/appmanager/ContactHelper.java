@@ -35,16 +35,17 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("home page"));
   }
 
-  public void selectContactForEdition() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  public void selectContactForEdition(int index) {
+    index += 2;
+    wd.findElement(By. xpath("//table[@id='maintable']/tbody/tr[" + index + "]/td[8]/a/img")).click();
   }
 
   public void submitContactModification() {
     click(By.name("update"));
   }
 
-  public void selectContact() {
-    click(By.xpath("html/body/div[1]/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void deleteSelectedContact() {
@@ -56,8 +57,9 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form[2]/input[2]"));
   }
 
-  public void selectContactForDetails() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a/img"));
+  public void selectContactForDetails(int index) {
+    index += 2;
+    wd.findElement(By. xpath("//table[@id='maintable']/tbody/tr[" + index + "]/td[7]/a/img")).click();
   }
 
   public void editContactFromDetailsPage() {
@@ -71,7 +73,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public boolean isThereAContact() {
-    return isElementPresent(By.xpath("html/body/div[1]/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
+    return isElementPresent(By.name("selected[]"));
   }
 
   public void checkContactPresence(NavigationHelper n, GroupHelper g){
