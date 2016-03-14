@@ -4,6 +4,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
+
+import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
@@ -17,6 +20,7 @@ public class ContactCreationTests extends TestBase {
     app.getContactHelper().returnToHomePage();
     int after = app.getContactHelper().getContactCount();
     Assert.assertEquals(after, before + 1);
+
   }
 
 
