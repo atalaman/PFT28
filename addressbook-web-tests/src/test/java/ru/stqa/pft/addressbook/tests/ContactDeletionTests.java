@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.appmanager.NavigationHelper;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.List;
+
 public class ContactDeletionTests extends TestBase {
 
   @Test(enabled = false)
@@ -39,14 +41,15 @@ public class ContactDeletionTests extends TestBase {
 
   public void testContactDeletionByDetailsIcon() {
     app.getNavigationHelper().gotoHomePage();
-    int before = app.getContactHelper().getContactCount();
-    if (app.getContactHelper().isThereAContact() == false)
-      before++;
     app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
-    app.getContactHelper().selectContactForDetails(before - 1);
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.getContactHelper().selectContactForDetails(before.size() - 1);
     app.getContactHelper().editContactFromDetailsPage();
     app.getContactHelper().deleteEditedContact();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before - 1);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size() - 1);
+
+    before.remove(before.size() - 1);
+    Assert.assertEquals(after, before);
   }
 }
