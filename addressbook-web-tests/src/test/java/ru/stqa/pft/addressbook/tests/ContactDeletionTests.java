@@ -13,10 +13,8 @@ public class ContactDeletionTests extends TestBase {
 
   public void testContactDeletionByDeleteButton() {
     app.getNavigationHelper().gotoHomePage();
-    int before = app.getContactHelper().getContactCount();
-    if (app.getContactHelper().isThereAContact() == false)
-      before++;
     app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
+    int before = app.getContactHelper().getContactCount();
     app.getContactHelper().selectContact(before - 1);
     app.getContactHelper().deleteSelectedContact();
     int after = app.getContactHelper().getContactCount();
@@ -27,10 +25,8 @@ public class ContactDeletionTests extends TestBase {
 
   public void testContactDeletionByEditIcon() {
     app.getNavigationHelper().gotoHomePage();
-    int before = app.getContactHelper().getContactCount();
-    if (app.getContactHelper().isThereAContact() == false)
-      before++;
     app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
+    int before = app.getContactHelper().getContactCount();
     app.getContactHelper().selectContactForEdition(before - 1);
     app.getContactHelper().deleteEditedContact();
     int after = app.getContactHelper().getContactCount();

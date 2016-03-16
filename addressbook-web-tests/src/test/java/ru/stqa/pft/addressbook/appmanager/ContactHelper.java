@@ -76,7 +76,7 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-  public boolean isThereAContact() {
+   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }
 
@@ -99,8 +99,9 @@ public class ContactHelper extends HelperBase {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=entry]"));
     for (WebElement element : elements) {
-      String firstname = element.getText();
-      String lastname = element.getText();
+      String[] name = element.getText().split(" ");
+      String lastname = name[0];
+      String firstname = name[1];
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null);
       contacts.add(contact);
