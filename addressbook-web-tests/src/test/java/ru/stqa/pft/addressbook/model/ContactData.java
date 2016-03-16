@@ -77,4 +77,8 @@ public class ContactData {
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     return result;
   }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 }

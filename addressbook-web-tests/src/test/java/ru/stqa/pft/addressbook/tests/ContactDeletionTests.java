@@ -9,28 +9,34 @@ import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
 
-  @Test(enabled = false)
+  @Test
 
   public void testContactDeletionByDeleteButton() {
     app.getNavigationHelper().gotoHomePage();
     app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
-    int before = app.getContactHelper().getContactCount();
-    app.getContactHelper().selectContact(before - 1);
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.getContactHelper().selectContact(before.size() - 1);
     app.getContactHelper().deleteSelectedContact();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before - 1);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size() - 1);
+
+    before.remove(before.size() - 1);
+    Assert.assertEquals(after, before);
   }
 
-  @Test(enabled = false)
+  @Test
 
   public void testContactDeletionByEditIcon() {
     app.getNavigationHelper().gotoHomePage();
     app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
-    int before = app.getContactHelper().getContactCount();
-    app.getContactHelper().selectContactForEdition(before - 1);
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.getContactHelper().selectContactForEdition(before.size() - 1);
     app.getContactHelper().deleteEditedContact();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before - 1);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size() - 1);
+
+    before.remove(before.size() - 1);
+    Assert.assertEquals(after, before);
   }
 
   @Test
