@@ -11,8 +11,8 @@ public class ContactModificationTests extends TestBase{
 
   @Test
   public void testContactModification(){
-    app.getNavigationHelper().gotoHomePage();
-    app.getContactHelper().checkContactPresence(app.getNavigationHelper(), app.getGroupHelper());
+    app.goTo().gotoHomePage();
+    app.getContactHelper().checkContactPresence(app.goTo(), app.group());
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().selectContactForEdition(before.size() - 1);
     ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "Ivan22", "Petrov", "Somewhere", "+19012345678", "ipetrov@gmail.com", null);

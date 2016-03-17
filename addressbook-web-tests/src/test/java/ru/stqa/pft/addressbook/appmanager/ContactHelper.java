@@ -82,9 +82,9 @@ public class ContactHelper extends HelperBase {
 
   public void checkContactPresence(NavigationHelper n, GroupHelper g){
     if (!isThereAContact()) {
-      n.gotoGroupPage();
+      n.groupPage();
       if(!g.isThereAGroup()){
-        g.createGroup(new GroupData("test1", null, null));
+        g.create(new GroupData().withName("test1"));
       }
       n.gotoNewContactPage();
       contactCreation(new ContactData("Ivan", "Petrov", "Somewhere", "+19012345678", "ipetrov@gmail.com", "test1"), true);
