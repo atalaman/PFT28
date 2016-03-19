@@ -98,19 +98,8 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-   public boolean isThereAContact() {
+  public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
-  }
-
-  public void checkContactPresence(NavigationHelper n, GroupHelper g){
-    if (!isThereAContact()) {
-      n.groupPage();
-      if(!g.isThereAGroup()){
-        g.create(new GroupData().withName("test1"));
-      }
-      n.contactPage();
-      create(new ContactData().withFirstName("Ivan").withLastName("Petrov").withGroup("test1"));
-    }
   }
 
   public int getContactCount() {
