@@ -9,19 +9,12 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactModificationTests extends TestBase{
+public class ContactModificationTests extends ContactTestsStart{
 
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().HomePage();
-    if (app.contact().all().isEmpty()) {
-      app.goTo().groupPage();
-      if (app.group().all().isEmpty()) {
-        app.group().create(new GroupData().withName("test1"));
-      }
-      app.goTo().contactPage();
-      app.contact().create(new ContactData().withFirstName("Petya").withLastName("Sergeev").withGroup("test1"));
-    }
+    createContactForEmptyList();
   }
 
   @Test
