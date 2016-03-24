@@ -77,6 +77,32 @@ public class ContactHelper extends HelperBase {
     type(By.name("work"), contact.getWorkPhone());
   }
 
+  public void addEmails(ContactData contact) {
+    selectContactByEditIcon(contact.getId());
+    fillEmails(contact);
+    submitContactModification();
+    contactCache = null;
+    returnToHomePage();
+  }
+
+  private void fillEmails(ContactData contact) {
+    type(By.name("email"), contact.getEmail());
+    type(By.name("email2"), contact.getEmail2());
+    type(By.name("email3"), contact.getEmail3());
+  }
+
+  public void addAddress(ContactData contact) {
+    selectContactByEditIcon(contact.getId());
+    fillAddress(contact);
+    submitContactModification();
+    contactCache = null;
+    returnToHomePage();
+  }
+
+  private void fillAddress(ContactData contact) {
+    type(By.name("address"), contact.getAddress());
+  }
+
   public void deleteByButton(ContactData contact) {
     selectContactByCheckbox(contact.getId());
     deleteSelectedContact();

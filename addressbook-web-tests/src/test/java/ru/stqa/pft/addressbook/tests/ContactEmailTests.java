@@ -12,16 +12,26 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactEmailTests extends ContactTestsStart {
 
+  public ContactData contact;
+  int id;
+
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().HomePage();
     createContactForEmptyList();
+    ContactData contact = app.contact().all().iterator().next();
+    id = contact.getId();
+    if (contact.getAllEmails().isEmpty()) {
+      ContactData changedContact = new ContactData().withId(contact.getId()).withFirstName(contact.getFirstName())
+              .withLastName(contact.getLastName()).withAddress(contact.getAddress()).withEmail("123@dr.com")
+              .withEmail2("876543rf").withEmail3("ghtjkis");
+      app.contact().addEmails(changedContact);
+    }
   }
 
   @Test
   public void testContact(){
-    app.goTo().HomePage();
-    ContactData contact = app.contact().all().iterator().next();
+    contact = app.contact().retrieveContact(id);
     ContactData contactInfoEmailsFromEditForm = app.contact().infoWithEmailsFromEditForm(contact);
     assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoEmailsFromEditForm)));
   }

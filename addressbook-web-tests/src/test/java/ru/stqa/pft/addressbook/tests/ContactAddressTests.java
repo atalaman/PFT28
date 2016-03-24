@@ -9,16 +9,26 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactAddressTests extends ContactTestsStart{
 
+  public ContactData contact;
+  int id;
+
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().HomePage();
     createContactForEmptyList();
+    ContactData contact = app.contact().all().iterator().next();
+    id = contact.getId();
+    if (contact.getAddress().isEmpty()) {
+      ContactData changedContact = new ContactData().withId(contact.getId()).withFirstName(contact.getFirstName())
+              .withLastName(contact.getLastName()).withEmail(contact.getEmail())
+              .withAddress("45689 Gorkogo Panasa Street, apt. 85 somewhere\n" + "Moskow Russia 12345");
+      app.contact().addAddress(changedContact);
+    }
   }
 
   @Test
   public void testContact(){
-    app.goTo().HomePage();
-    ContactData contact = app.contact().all().iterator().next();
+    contact = app.contact().retrieveContact(id);
     ContactData contactInfoAddressFromEditForm = app.contact().infoWithAddressFromEditForm(contact);
     assertThat(contact.getAddress(), equalTo(contactInfoAddressFromEditForm.getAddress()));
   }
