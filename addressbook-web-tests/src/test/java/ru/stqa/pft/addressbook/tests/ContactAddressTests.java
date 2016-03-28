@@ -29,7 +29,7 @@ public class ContactAddressTests extends ContactTestsStart{
   @Test
   public void testContact(){
     contact = app.contact().retrieveContact(id);
-    ContactData contactInfoAddressFromEditForm = app.contact().infoWithAddressFromEditForm(contact);
+    ContactData contactInfoAddressFromEditForm = app.contact().infoFromEditForm(contact);
     assertThat(contact.getAddress(), equalTo(contactInfoAddressFromEditForm.getAddress()));
   }
 

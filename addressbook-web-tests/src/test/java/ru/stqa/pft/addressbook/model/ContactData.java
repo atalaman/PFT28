@@ -1,8 +1,10 @@
 package ru.stqa.pft.addressbook.model;
 
-public class ContactData {
+public class
+ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstName;
+  private String middleName;
   private String lastName;
   private String address;
   private String homePhone;
@@ -17,6 +19,10 @@ public class ContactData {
 
   public String getFirstName() {
     return firstName;
+  }
+
+  public String getMiddleName() {
+    return middleName;
   }
 
   public String getLastName() {
@@ -79,6 +85,11 @@ public class ContactData {
 
   public ContactData withLastName(String lastName) {
     this.lastName = lastName;
+    return this;
+  }
+
+  public ContactData withMiddleName(String middleName) {
+    this.middleName = middleName;
     return this;
   }
 

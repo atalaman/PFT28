@@ -32,12 +32,7 @@ public class ContactEmailTests extends ContactTestsStart {
   @Test
   public void testContact(){
     contact = app.contact().retrieveContact(id);
-    ContactData contactInfoEmailsFromEditForm = app.contact().infoWithEmailsFromEditForm(contact);
-    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoEmailsFromEditForm)));
-  }
-
-  private String mergeEmails(ContactData contact) {
-    return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
-            .stream().filter((s) -> !s.equals("")).collect(Collectors.joining("\n"));
+    ContactData contactInfoEmailsFromEditForm = app.contact().infoFromEditForm(contact);
+    assertThat(contact.getAllEmails(), equalTo(app.contact().mergeEmails(contactInfoEmailsFromEditForm)));
   }
 }

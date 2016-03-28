@@ -7,9 +7,10 @@ import org.testng.Assert;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.GroupData;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ContactHelper extends HelperBase {
 
@@ -183,38 +184,52 @@ public class ContactHelper extends HelperBase {
     return contact;
   }
 
-  public ContactData infoWithPhonesFromEditForm(ContactData contact) {
+  public ContactData infoFromEditForm(ContactData contact) {
     initContactModificationById(contact.getId());
     String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String middlename = wd.findElement(By.name("middlename")).getAttribute("value");
     String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String address = wd.findElement(By.cssSelector("#content>form>textarea")).getText();
     String home = wd.findElement(By.name("home")).getAttribute("value");
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
-    wd.navigate().back();
-    return new ContactData().withId(contact.getId()).withFirstName(firstname)
-            .withLastName(lastname).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
-  }
-
-  public ContactData infoWithEmailsFromEditForm(ContactData contact) {
-    initContactModificationById(contact.getId());
-    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
-    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
     String email = wd.findElement(By.name("email")).getAttribute("value");
     String email2 = wd.findElement(By.name("email2")).getAttribute("value");
     String email3 = wd.findElement(By.name("email3")).getAttribute("value");
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withFirstName(firstname)
-            .withLastName(lastname).withEmail(email).withEmail2(email2).withEmail3(email3);
+            .withMiddleName(middlename).withLastName(lastname).withAddress(address)
+            .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
+            .withEmail(email).withEmail2(email2).withEmail3(email3);
   }
 
-  public ContactData infoWithAddressFromEditForm(ContactData contact) {
-    initContactModificationById(contact.getId());
-    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
-    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
-    String address = wd.findElement(By.cssSelector("#content>form>textarea")).getText();
-    wd.navigate().back();
-    return new ContactData().withId(contact.getId()).withFirstName(firstname)
-            .withLastName(lastname).withAddress(address);
+  public String mergeEmails(ContactData contact) {
+    return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+            .stream().filter((s) -> !s.equals("")).collect(Collectors.joining("\n"));
+  }
+
+  public String mergePhones(ContactData contact) {
+    return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+            .stream().filter((s) -> !s.equals("")).map(ContactHelper::cleaned).collect(Collectors.joining("\n"));
+  }
+
+  public static String cleaned(String phone) {
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+  }
+
+  public String cleanedContent(String content) {
+    return content.replaceAll("H:\\s", "").replaceAll("M:\\s", "").replaceAll("W:\\s", "")
+            .replaceAll("\\s\\(www.*", "").replaceAll("\n\n", "\n");
+  }
+
+  public String allEditDataMerge(ContactData contact){
+    String name = Arrays.asList(contact.getFirstName(), contact.getMiddleName(), contact.getLastName())
+            .stream().filter((s) -> !s.equals("")).collect(Collectors.joining(" "));
+    String middleContent = Arrays.asList(contact.getAddress(), contact.getHomePhone(), contact.getMobilePhone(),
+            contact.getWorkPhone())
+            .stream().filter((s) -> !s.equals("")).collect(Collectors.joining("\n"));
+    String email = mergeEmails(contact);
+    return name + "\n" + middleContent + "\n" + email;
   }
 
   private void initContactModificationById(int id) {
