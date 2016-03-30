@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,10 +21,15 @@ public class ContactHelper extends HelperBase {
 
   public void fillContactform(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstName());
+    type(By.name("middlename"), contactData.getMiddleName());
     type(By.name("lastname"), contactData.getLastName());
     type(By.name("address"), contactData.getAddress());
     type(By.name("home"), contactData.getHomePhone());
+    type(By.name("mobile"), contactData.getMobilePhone());
+    type(By.name("work"), contactData.getWorkPhone());
     type(By.name("email"), contactData.getEmail());
+    type(By.name("email2"), contactData.getEmail2());
+    type(By.name("email3"), contactData.getEmail3());
     attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
@@ -31,6 +37,13 @@ public class ContactHelper extends HelperBase {
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
+  }
+
+  public void create(ContactData contact) {
+    fillContactform(contact, true);
+    submitContactCreation();
+    contactCache = null;
+    returnToHomePage();
   }
 
   public void submitContactCreation() {
@@ -135,13 +148,6 @@ public class ContactHelper extends HelperBase {
 
   public void editContactFromDetailsPage() {
     click(By.name("modifiy"));
-  }
-
-  public void create(ContactData contact) {
-    fillContactform(contact, true);
-    submitContactCreation();
-    contactCache = null;
-    returnToHomePage();
   }
 
   public boolean isThereAContact() {

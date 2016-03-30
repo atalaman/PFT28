@@ -9,7 +9,8 @@
     "workPhone": "workPhone 0",
     "email": "emailMain 0",
     "email2": "emailAdd 0",
-    "email3": "emailAddit 0"
+    "email3": "emailAddit 0",
+    "group": "test1"
   },
   {
     "firstName": "fname 1",
@@ -21,7 +22,8 @@
     "workPhone": "workPhone 1",
     "email": "emailMain 1",
     "email2": "emailAdd 1",
-    "email3": "emailAddit 1"
+    "email3": "emailAddit 1",
+    "group": "test1"
   },
   {
     "firstName": "fname 2",
@@ -33,6 +35,7 @@
     "workPhone": "workPhone 2",
     "email": "emailMain 2",
     "email2": "emailAdd 2",
-    "email3": "emailAddit 2"
+    "email3": "emailAddit 2",
+    "group": "test1"
   }
 ]
