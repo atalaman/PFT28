@@ -7,35 +7,9 @@
     "homePhone": "homePhone 0",
     "mobilePhone": "mobilePhone 0",
     "workPhone": "workPhone 0",
-    "email": "emailMain 0",
-    "email2": "emailAdd 0",
-    "email3": "emailAddit 0",
-    "group": "test1"
-  },
-  {
-    "firstName": "fname 1",
-    "middleName": "mname 1",
-    "lastName": "lname 1",
-    "address": "address 1",
-    "homePhone": "homePhone 1",
-    "mobilePhone": "mobilePhone 1",
-    "workPhone": "workPhone 1",
-    "email": "emailMain 1",
-    "email2": "emailAdd 1",
-    "email3": "emailAddit 1",
-    "group": "test1"
-  },
-  {
-    "firstName": "fname 2",
-    "middleName": "mname 2",
-    "lastName": "lname 2",
-    "address": "address 2",
-    "homePhone": "homePhone 2",
-    "mobilePhone": "mobilePhone 2",
-    "workPhone": "workPhone 2",
-    "email": "emailMain 2",
-    "email2": "emailAdd 2",
-    "email3": "emailAddit 2",
+    "email": "emailMain0",
+    "email2": "emailAdd0",
+    "email3": "emailAddit0",
     "group": "test1"
   }
 ]

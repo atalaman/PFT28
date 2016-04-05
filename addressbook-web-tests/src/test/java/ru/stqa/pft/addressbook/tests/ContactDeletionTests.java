@@ -20,11 +20,11 @@ public class ContactDeletionTests extends ContactTestsStart {
   @Test
 
   public void testContactDeletionByDeleteButton() {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     ContactData deletedContact = before.iterator().next();
     app.contact().deleteByButton(deletedContact);
     assertThat(app.contact().count(), equalTo(before.size() - 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(deletedContact)));
   }
 
@@ -32,22 +32,22 @@ public class ContactDeletionTests extends ContactTestsStart {
   @Test
 
   public void testContactDeletionByEditIcon() {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     ContactData deletedContact = before.iterator().next();
     app.contact().deleteByEdition(deletedContact);
     assertThat(app.contact().count(), equalTo(before.size() - 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(deletedContact)));
   }
 
   @Test
 
   public void testContactDeletionByDetailsIcon() {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     ContactData deletedContact = before.iterator().next();
     app.contact().deleteByDetails(deletedContact);
     assertThat(app.contact().count(), equalTo(before.size() - 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(deletedContact)));
   }
 }
