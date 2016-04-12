@@ -26,6 +26,7 @@ public class ContactDeletionTests extends ContactTestsStart {
     assertThat(app.contact().count(), equalTo(before.size() - 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(deletedContact)));
+    verifyContactListInUI();
   }
 
 
@@ -38,6 +39,7 @@ public class ContactDeletionTests extends ContactTestsStart {
     assertThat(app.contact().count(), equalTo(before.size() - 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(deletedContact)));
+    verifyContactListInUI();
   }
 
   @Test
@@ -49,5 +51,6 @@ public class ContactDeletionTests extends ContactTestsStart {
     assertThat(app.contact().count(), equalTo(before.size() - 1));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(deletedContact)));
+    verifyContactListInUI();
   }
 }

@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
 import java.util.Arrays;
@@ -33,7 +34,10 @@ public class ContactHelper extends HelperBase {
 
     if (creation) {
       attach(By.name("photo"), contactData.getPhoto());
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      if(contactData.getGroups().size() > 0){
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -42,7 +46,7 @@ public class ContactHelper extends HelperBase {
   public void create(ContactData contact) {
     fillContactform(contact, true);
     submitContactCreation();
-    contactCache = null;
+    resetContactCache();
     returnToHomePage();
   }
 
@@ -52,6 +56,18 @@ public class ContactHelper extends HelperBase {
 
   public void returnToHomePage() {
     click(By.linkText("home page"));
+  }
+
+  public void selectGroupForAdditionFromTheList(GroupData group){
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
+  }
+
+  public void addContactToGroup(){
+    click(By.name("add"));
+  }
+
+  public void deleteContactFromGroup(){
+    click(By.name("remove"));
   }
 
   public void selectContactByEditIcon(int id) {
@@ -74,7 +90,7 @@ public class ContactHelper extends HelperBase {
     selectContactByEditIcon(contact.getId());
     fillContactform(contact, false);
     submitContactModification();
-    contactCache = null;
+    resetContactCache();
     returnToHomePage();
   }
 
@@ -82,7 +98,7 @@ public class ContactHelper extends HelperBase {
     selectContactByEditIcon(contact.getId());
     fillPhones(contact);
     submitContactModification();
-    contactCache = null;
+    resetContactCache();
     returnToHomePage();
   }
 
@@ -96,7 +112,7 @@ public class ContactHelper extends HelperBase {
     selectContactByEditIcon(contact.getId());
     fillEmails(contact);
     submitContactModification();
-    contactCache = null;
+    resetContactCache();
     returnToHomePage();
   }
 
@@ -110,7 +126,7 @@ public class ContactHelper extends HelperBase {
     selectContactByEditIcon(contact.getId());
     fillAddress(contact);
     submitContactModification();
-    contactCache = null;
+    resetContactCache();
     returnToHomePage();
   }
 
@@ -121,19 +137,23 @@ public class ContactHelper extends HelperBase {
   public void deleteByButton(ContactData contact) {
     selectContactByCheckbox(contact.getId());
     deleteSelectedContact();
-    contactCache = null;
+    resetContactCache();
   }
 
   public void deleteByEdition(ContactData contact) {
     selectContactByEditIcon(contact.getId());
     deleteEditedContact();
-    contactCache = null;
+    resetContactCache();
   }
 
   public void deleteByDetails(ContactData contact) {
     selectContactByDetails(contact.getId());
     editContactFromDetailsPage();
     deleteEditedContact();
+    resetContactCache();
+  }
+
+  public void resetContactCache() {
     contactCache = null;
   }
 
