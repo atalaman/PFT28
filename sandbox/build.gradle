@@ -8,4 +8,9 @@ repositories {
 
 dependencies {
     compile 'org.testng:testng:6.9.10'
+    compile 'ch.qos.logback:logback-classic:1.1.7'
+}
+
+test {
+    useTestNG()
 }
