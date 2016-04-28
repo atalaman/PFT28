@@ -73,15 +73,4 @@ public class ContactHelper extends HelperBase {
   public boolean isThereAContact() {
     return isElementPresent(By.xpath("html/body/div[1]/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
   }
-
-  public void checkContactPresence(NavigationHelper n, GroupHelper g){
-    if (!isThereAContact()) {
-      n.gotoGroupPage();
-      if(!g.isThereAGroup()){
-        g.createGroup(new GroupData("test1", null, null));
-      }
-      n.gotoNewContactPage();
-      contactCreation(new ContactData("Ivan", "Petrov", "Somewhere", "+19012345678", "ipetrov@gmail.com", "test1"), true);
-    }
-  }
 }
